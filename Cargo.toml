@@ -1,0 +1,6 @@
+[package]
+name = "huffman-archiver-rust"
+version = "0.1.0"
+authors = ["Kristiyan Tsaklev <cuki@cukii.tk>"]
+
+[dependencies]
