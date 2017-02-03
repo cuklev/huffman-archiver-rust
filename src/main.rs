@@ -1,8 +1,7 @@
 mod binary;
 mod huffman;
-use huffman::huffman::build_huffman_tree;
+mod commands;
 
 fn main() {
-    let f = [0; 256];
-    build_huffman_tree(f);
+    commands::compress::compress_file_to_file("test1", "test2");
 }

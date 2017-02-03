@@ -27,7 +27,7 @@ impl<T: Write> BinaryWriter<T> {
 
     pub fn put_u8(&mut self, x: u8) {
         self.writer.write(&[self.buffer | (x >> (8 - self.index))]);
-        self.buffer = x << self.index;
+        self.buffer = x.wrapping_shl(self.index as u32);
     }
 
     pub fn put_u64(&mut self, x: u64) {
