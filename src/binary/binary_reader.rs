@@ -1,15 +1,15 @@
 use std::io::{Read, BufReader, Bytes};
 
 pub struct BinaryReader<T> {
-buffer: u8,
-            index: i8,
-            reader: Bytes<BufReader<T>>,
+    buffer: u8,
+    index: i8,
+    reader: Bytes<BufReader<T>>,
 }
 
 impl<T: Read> BinaryReader<T> {
     pub fn new(f: T) -> BinaryReader<T> {
         BinaryReader {
-buffer: 0,
+            buffer: 0,
             index: 0,
             reader: BufReader::new(f).bytes(),
         }
