@@ -15,7 +15,7 @@ impl<T: Read> BinaryReader<T> {
         }
     }
 
-    pub fn get(&mut self) -> u8 {
+    pub fn get_bit(&mut self) -> u8 {
         if self.index == 0 {
             self.index = 7;
             if let Some(byte) = self.reader.next() {
