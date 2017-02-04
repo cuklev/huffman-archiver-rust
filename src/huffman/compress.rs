@@ -35,7 +35,7 @@ fn dfs<W: Write>(node: &HuffmanNode, bit_sequence: &mut Vec<bool>, table: &mut [
     }
 }
 
-pub fn compress<R: Read, W: Write>(freq_table: [u64; 256], input_stream: &mut Bytes<R>, binary_out: &mut BinaryWriter<W>) {
+pub fn compress<R: Read, W: Write>(freq_table: [u64; 256], input_stream: &mut R, binary_out: &mut BinaryWriter<W>) {
     let mut byte_length = 0;
     let mut non_zero = -1;
     for i in 0..freq_table.len() {
@@ -64,7 +64,8 @@ pub fn compress<R: Read, W: Write>(freq_table: [u64; 256], input_stream: &mut By
         let mut bit_sequence = vec![];
         dfs(&root, &mut bit_sequence, table.as_mut_slice(), binary_out);
 
-        while let Some(Ok(x)) = input_stream.next() {
+        let mut input_iterator = input_stream.bytes();
+        while let Some(Ok(x)) = input_iterator.next() {
             for bit in &table[x as usize] {
                 binary_out.put_bit(if *bit {1} else {0});
             }

@@ -1,4 +1,4 @@
-use std::io::{BufReader, BufWriter, Write, Read, Bytes};
+use std::io::{BufReader, BufWriter, Read, Write};
 use std::fs::File;
 
 use huffman::compress::{compress, read_freq_table};
@@ -22,7 +22,7 @@ pub fn compress_file_to_stream<W: Write>(input_file: &str, output_stream: &mut W
     };
 
     if let Ok(f) = File::open(input_file) {
-        let mut input_stream = BufReader::new(f).bytes();
+        let mut input_stream = BufReader::new(f);
         let mut binary_out = BinaryWriter::new(output_stream);
         compress(freq_table, &mut input_stream, &mut binary_out);
     }
