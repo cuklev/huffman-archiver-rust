@@ -28,7 +28,7 @@ pub fn decompress<R: Read, W: Write>(binary_in: &mut BinaryReader<R>, output_str
     }
 
     let mut node = &root;
-    while true {
+    loop {
         match *node {
             HuffmanNode::Leaf(x) => {
                 output_stream.write(&[x]);
